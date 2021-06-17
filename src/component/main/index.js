@@ -1,43 +1,59 @@
 import Typography from '@material-ui/core/Typography';
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import NewTask from '../newTask'
 
-const Main = () => {
-  // CSS styles
-  const useStyles = makeStyles(theme => ({
-    header: {
-      width: '100%',
-      height: '26vh',
-      position: 'relative',
-      backgroundColor: '#CED5B8',
-    },
-    title: {
-      paddingBottom: theme.spacing(4),
+// CSS styles
+const styles = theme => ({
+  header: {
+    width: '100%',
+    height: '26vh',
+    position: 'relative',
+    backgroundColor: '#CED5B8',
+  },
+  title: {
+    paddingBottom: theme.spacing(4),
+    color: '#20170E',
+  },
+  button: {
+    backgroundColor: "#f7ecd4",
+    color: "#20170E",
+    borderRadius: "25px",
+    marginTop: "25px",
+    '&:hover': {
+      backgroundColor: '#cfa986',
       color: '#20170E',
-    },
-    button: {
-      backgroundColor: "#f7ecd4",
-      color: "#20170E",
-      borderRadius: "25px",
-      marginTop: "25px",
-      '&:hover': {
-        backgroundColor: '#cfa986',
-        color: '#20170E',
-      }
-    },
-  }));
+    }
+  },
+});
 
-  const classes = useStyles();
+
+
+class Main extends React.Component {
+  // Overlay
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick = () => {
+    this.setState({ show: true });
+  };
 
   // Render main portion of task list
-
-    return (
-      <section className={classes.header}>
+    render() {
+      const { show } = this.state;
+      const { classes } = this.props;
+      return(
+        <section className={classes.header}>
         <Box
           height="100%"
           display="flex"
@@ -60,9 +76,11 @@ const Main = () => {
               variant="contained" 
               size="medium"
               startIcon={<AddIcon />}
+              onClick={() => this.handleClick(true)}
             >
                 New Task
             </Button>
+            {show === true ? <NewTask /> : "none"};
           </Grid>
           <Grid item xs={12}>
             <Grid
@@ -87,9 +105,8 @@ const Main = () => {
           <Divider orientation="vertical" flexItem />
         </Grid>
       </section>
-      
-
-    );
+      )
+    }
 }
 
-export default Main
+export default withStyles(styles)(Main)

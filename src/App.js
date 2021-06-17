@@ -1,5 +1,6 @@
 import Main from "./component/main"
-import Task from "./component/task"
+import NewTask from "./component/newTask"
+import CurrentTask from './component/currentTask'
 import './App.css';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -20,7 +21,8 @@ function App() {
     <div className="App">
     <Main/>
     </div>
-    {/* <Task /> */}
+    {/* <NewTask /> */}
+    {/* <CurrentTask /> */}
     </ThemeProvider>
   );
 }
