@@ -11,7 +11,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
-const Task = () => {
+const NewTask = () => {
   // CSS styles
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -27,43 +27,21 @@ const Task = () => {
         backgroundColor: '#cfa986',
         color: '#20170E',
       }
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
     }
   }));
 
   const classes = useStyles();
 
-  // Third-party API for getting current time and date I WISH THIS WOULD WORK LMAO
-  const [time, setTime] = useState(loadTime);
-  
-  async function loadTime() {
-    const time = await axios({
-      method: 'get',
-      url: 'https://market.mashape.com/parsify/format#time'
-    });
-    const getTime = time.data.formatted.handTime;
-  
-    setTime({
-      timeAndDate: getTime
-    });
-  }
-  
-  useEffect(() => {
-    loadTime();
-  }, []);
-
   // Render new task
   return (
-    <Card style={{ padding: 16 }} className={classes.paper}>
-      <CardHeader action={
-        <Button
-        className={classes.button} 
-        variant="contained" 
-        size="small"
-        startIcon={<DoneIcon />}
-      >
-        Completed
-      </Button>
-      }
+    <Card style={{ padding: 16 }} className={(classes.paper)}>
+      <CardHeader
+      title="New Task"
       />
       <Grid 
         container 
@@ -80,7 +58,14 @@ const Task = () => {
         </Grid>
         <Grid item xs={12}>
           Date Created:
-          {time.timeAndDate}
+          <TextField
+            id="datetime-local"
+            type="datetime-local"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
         </Grid>
         <Grid item xs={12}>
           <Grid
@@ -112,7 +97,7 @@ const Task = () => {
           startIcon={<DeleteIcon />}
           >
             Delete
-          </Button>  
+          </Button>
         </Grid>
         <Grid item xs={6}>
           <Button
@@ -130,4 +115,4 @@ const Task = () => {
   )
 }
 
-export default Task
+export default NewTask
