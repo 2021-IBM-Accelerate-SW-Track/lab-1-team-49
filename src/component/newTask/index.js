@@ -12,6 +12,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 
 const NewTask = () => {
+  // New Task Object
+  const newTask = new Object();
   // CSS styles
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -52,6 +54,7 @@ const NewTask = () => {
           <TextField 
             fullWidth
             required
+            id="title"
             type="text"
             label="Task Name"
           />
@@ -59,7 +62,7 @@ const NewTask = () => {
         <Grid item xs={12}>
           Date Created:
           <TextField
-            id="datetime-local"
+            id="date"
             type="datetime-local"
             className={classes.textField}
             InputLabelProps={{
@@ -76,7 +79,7 @@ const NewTask = () => {
             <Grid item xs={4}>
               Status
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={4} id="status">
               To Do
             </Grid>
           </Grid>
@@ -84,6 +87,7 @@ const NewTask = () => {
         <Grid item xs={12}>
           <TextField
           fullWidth
+          id="des"
           type="text"
           label="Task Description"
         />
@@ -114,5 +118,29 @@ const NewTask = () => {
     </Card>
   )
 }
+
+// Initialize properties of each new task from form input
+// newTask.id = document.getElementById("title").value;
+// newTask.status = document.getElementById("status").value;
+// newTask.date = document.getElementById("date").value;
+// newTask.description = document.getElementById("des").value;
+
+// Insert each new tasks into array
+const listOfTasksCreated = [ ];
+// function listAllTasks() {
+  
+// }
+
+// Handle event represeting a user clicking on New Task
+// function handleEditFormSubmit(event) {
+//   listOfTasksCreated.map(task => {
+//     if(event.target.dataset.id == task.id) {
+//       task.title = document.getElementById("title").value;
+//       task.date = document.getElementById("date").value;
+//       task.status = document.getElementById("status").value;
+//       task.description = document.getElementById("des").value;
+//     }
+//   })
+// }
 
 export default NewTask
