@@ -80,7 +80,7 @@ class Main extends React.Component {
             >
                 New Task
             </Button>
-            {show === true ? <NewTask /> : "none"};
+            {show === true ? <NewTask /> : ''}
           </Grid>
           <Grid item xs={12}>
             <Grid
