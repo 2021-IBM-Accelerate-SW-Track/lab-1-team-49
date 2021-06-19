@@ -8,6 +8,16 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import NewTask from '../newTask'
 
+export let item = {
+  title: undefined, 
+  description: undefined,
+  date: undefined,
+  completed: false
+};
+
+let todo = new Array();
+let done = new Array();
+
 // CSS styles
 const styles = theme => ({
   header: {

@@ -10,6 +10,7 @@ import { CardActions, CardHeader } from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import item from '../main';
 
 const CurrentTask = () => {
   // CSS styles
@@ -41,6 +42,7 @@ const CurrentTask = () => {
         variant="contained" 
         size="small"
         startIcon={<DoneIcon />}
+        onClick = {function() {return this.item.completed = true;}}
       >
         Completed
       </Button>
