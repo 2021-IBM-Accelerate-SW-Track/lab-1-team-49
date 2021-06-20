@@ -2,13 +2,13 @@ import React, {useState, Fragment} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CurrentTask from '../currentTask';
 
+// After a new task is created, a task card with the data is rendered
 const TaskCard = () => { 
   const useStyles = makeStyles(theme => ({
     title: {
@@ -29,7 +29,7 @@ const TaskCard = () => {
 
   const classes = useStyles();
 
-  // Styling for background color change of completion state
+  // Styling for background color change of completion state (green for done, tan for not done)
   const incompleteColor = {
     backgroundColor: "#f7ecd4",
     maxWidth: 275,

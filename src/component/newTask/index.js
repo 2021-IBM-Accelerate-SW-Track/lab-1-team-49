@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from "react";
-import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import { CardActions, CardHeader } from "@material-ui/core";
-import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
-const NewTask = () => {
-  // New Task Object
-  const newTask = new Object();
+
+// New Task Form that appears when "New Task" Button is clicked
+const NewTask = (props) => {
+
   // CSS styles
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -43,6 +43,13 @@ const NewTask = () => {
   return (
     <Card style={{ padding: 16 }} className={(classes.paper)}>
       <CardHeader
+      action={
+        <IconButton
+        onClick={() => props.handleClose()}
+        >
+          <CloseIcon />
+        </IconButton>
+      }
       title="New Task"
       />
       <Grid 
@@ -57,6 +64,7 @@ const NewTask = () => {
             id="title"
             type="text"
             label="Task Name"
+            onChange={(e) => props.handleChange("title", e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -65,6 +73,7 @@ const NewTask = () => {
             id="date"
             type="datetime-local"
             className={classes.textField}
+            onChange={(e) => props.handleChange("date", e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
@@ -90,6 +99,7 @@ const NewTask = () => {
           id="des"
           type="text"
           label="Task Description"
+          onChange={(e) => props.handleChange("des", e.target.value)}
         />
         </Grid>
         <CardActions>
@@ -109,6 +119,7 @@ const NewTask = () => {
             variant="contained" 
             size="small"
             startIcon={<CreateIcon />}
+            onClick={props.handleSubmit}
             >
               Create
             </Button>
@@ -118,29 +129,5 @@ const NewTask = () => {
     </Card>
   )
 }
-
-// Initialize properties of each new task from form input
-// newTask.id = document.getElementById("title").value;
-// newTask.status = document.getElementById("status").value;
-// newTask.date = document.getElementById("date").value;
-// newTask.description = document.getElementById("des").value;
-
-// Insert each new tasks into array
-const listOfTasksCreated = [ ];
-// function listAllTasks() {
-  
-// }
-
-// Handle event represeting a user clicking on New Task
-// function handleEditFormSubmit(event) {
-//   listOfTasksCreated.map(task => {
-//     if(event.target.dataset.id == task.id) {
-//       task.title = document.getElementById("title").value;
-//       task.date = document.getElementById("date").value;
-//       task.status = document.getElementById("status").value;
-//       task.description = document.getElementById("des").value;
-//     }
-//   })
-// }
 
 export default NewTask
