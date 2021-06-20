@@ -1,12 +1,12 @@
 import Typography from '@material-ui/core/Typography';
-import React from "react";
+import React, {useState} from "react";
 import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import NewTask from '../newTask'
+import TodoList from '../todoList'
 
 // CSS styles
 const styles = theme => ({
@@ -32,21 +32,52 @@ const styles = theme => ({
   },
 });
 
-
-
 class Main extends React.Component {
-  // Overlay
+
   constructor(props) {
     super(props);
     this.state = {
-      show: false
+      show: false,
+      title: "",
+      status: false,
+      date: new Date(),
+      des: "",
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.childElement = React.createRef();
   }
 
+  // Function passed into newTask form to handle changes in text fields and store into this.state
+  handleChange = (id, value) => {
+    if (id === "title") {
+      this.state.title = value;
+      console.log(this.state.title);
+    } else if (id === "date") {
+      this.state.date = value;
+    } else if (id === "des") {
+      this.state.des = value;
+    } else if (id === "status") {
+      this.state.status = true;
+    }
+  }
+
+  // Function that shows newTask form when button is clicked
   handleClick = () => {
     this.setState({ show: true });
   };
+
+  // Function that handles close icon on newTask form
+  handleClose = () => {
+    this.setState({ show: false });
+  }
+
+  // Function that handles submit button on newTask form
+  handleSubmit = () => {
+    this.childElement.current.addTask(this.state);
+  }
 
   // Render main portion of task list
     render() {
@@ -80,7 +111,7 @@ class Main extends React.Component {
             >
                 New Task
             </Button>
-            {show === true ? <NewTask /> : ''}
+            {show === true ? <NewTask data={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClose={this.handleClose}/> : ''}
           </Grid>
           <Grid item xs={12}>
             <Grid
@@ -90,7 +121,7 @@ class Main extends React.Component {
                 alignItems="center"
                 spacing={6}
             >
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Typography variant="h4" className={classes.title}>
                   To-Do
                 </Typography>
@@ -100,9 +131,14 @@ class Main extends React.Component {
                   Done
                 </Typography>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Grid>
-          <Divider orientation="vertical" flexItem />
+          {/* <Divider orientation="vertical" flexItem /> */}
+        </Grid>
+        </Grid>
+
+        <Grid>
+          <TodoList ref={this.childElement}/>
         </Grid>
       </section>
       )
