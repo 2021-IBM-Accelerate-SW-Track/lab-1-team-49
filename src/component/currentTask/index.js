@@ -10,6 +10,8 @@ import { CardActions, CardHeader } from "@material-ui/core";
 import DoneIcon from '@material-ui/icons/Done';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 const CurrentTask = () => {
   // CSS styles
@@ -36,14 +38,11 @@ const CurrentTask = () => {
   return (
     <Card style={{ padding: 16 }} className={classes.paper}>
       <CardHeader action={
-        <Button
-        className={classes.button} 
-        variant="contained" 
-        size="small"
-        startIcon={<DoneIcon />}
-      >
-        Completed
-      </Button>
+        <IconButton
+        onClick
+        >
+          <CloseIcon />
+        </IconButton>
       }
       title="New Task"
       />
