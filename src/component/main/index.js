@@ -79,7 +79,7 @@ class Main extends React.Component {
     console.log('child element', this.childElement);
     console.log('this.state', this.state);
     this.childElement.current.addTask(this.state);
-    this.setState({ show: false }); //close after submitting  task
+    this.setState({ show: false }); //close after submitting task
   }
 
   // Render main portion of task list
@@ -141,7 +141,7 @@ class Main extends React.Component {
         </Grid>
 
         <Grid>
-          <TodoList ref={this.childElement}/>
+          <TodoList ref={this.childElement} />
         </Grid>
       </section>
       )

@@ -43,7 +43,9 @@ const TaskCard = (prop) => {
 
   // Changes state of not complete to complete
   const [isComplete, setComplete] = useState(false);
-  const complete = () => setComplete(isComplete => !isComplete);
+  const complete = () => {
+    setComplete(isComplete => !isComplete);
+  }
 
   // Changes state to show the full current task details
   const [edit, setEdit] = useState(false);
@@ -81,7 +83,7 @@ const TaskCard = (prop) => {
           </Button>
       </CardActions>
     </Card>
-    {edit === true ? <CurrentTask /> : ''}
+    {edit === true ? <CurrentTask task={prop.task} /> : ''}
     </Fragment>
   )
 }
