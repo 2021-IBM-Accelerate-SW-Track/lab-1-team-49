@@ -76,7 +76,10 @@ class Main extends React.Component {
 
   // Function that handles submit button on newTask form
   handleSubmit = () => {
+    console.log('child element', this.childElement);
+    console.log('this.state', this.state);
     this.childElement.current.addTask(this.state);
+    this.setState({ show: false }); //close after submitting  task
   }
 
   // Render main portion of task list
@@ -102,9 +105,9 @@ class Main extends React.Component {
           spacing={5}
         >
           <Grid item xs={12}>
-            <Button 
-              className={classes.button} 
-              variant="contained" 
+            <Button
+              className={classes.button}
+              variant="contained"
               size="medium"
               startIcon={<AddIcon />}
               onClick={() => this.handleClick(true)}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
+import TaskCard from '../taskCard'
+
 
 // CSS Style
 const styles = theme => ({
@@ -37,19 +39,32 @@ class TodoList extends React.Component {
 
   // Function to add created task to list of tasks
   addTask = (task) => {
-    this.setState(state => {
-      const list = state.list.concat(task);
-      console.log(list);
-      return list;
-    })
+    console.log('task',task);
+    console.log('list', this.state.list);
+    this.state.list.push(task)
+    //I dont fully understand setState so I am just gonna push the task to the list - mieraf
+    // this.setState(state => {
+    //   const list = state.list.concat(task);
+    //   console.log(list);
+    //   return list;
+    // })
   }
 
   render() {
+    console.log(this.state.list);
     return (
+
       <Grid>
+      {this.state.list.length ?
+        <div>
+          {this.state.list.map(task =>
+            <TaskCard task={task} />
+          )}
+        </div>
+        :<p>Congrats! You have no tasks.</p> }
 
       </Grid>
-    )
+    );
   }
 }
 

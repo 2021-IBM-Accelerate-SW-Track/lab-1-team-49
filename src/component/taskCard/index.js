@@ -9,7 +9,8 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CurrentTask from '../currentTask';
 
 // After a new task is created, a task card with the data is rendered
-const TaskCard = () => { 
+const TaskCard = (prop) => {
+  console.log('passed in task', prop.task);
   const useStyles = makeStyles(theme => ({
     title: {
       padding: "20px",
@@ -49,17 +50,20 @@ const TaskCard = () => {
   const show = () => setEdit(edit => !edit);
 
   // Render new task
-  return ( 
+  return (
     <Fragment>
-      
+
     <Card style={ isComplete ? completeColor : incompleteColor } variant="outlined">
       <Typography className={classes.title}>
-        Task Name
+        {prop.task.title}
+      </Typography>
+      <Typography>
+        {prop.task.des}
       </Typography>
       <CardActions>
         <Button
-          className={classes.button} 
-          variant="contained" 
+          className={classes.button}
+          variant="contained"
           size="small"
           startIcon={<EditIcon />}
           onClick={show}
@@ -67,8 +71,8 @@ const TaskCard = () => {
             Edit
           </Button>
           <Button
-          className={classes.button} 
-          variant="contained" 
+          className={classes.button}
+          variant="contained"
           size="small"
           startIcon={<CheckCircleIcon />}
           onClick={complete}
