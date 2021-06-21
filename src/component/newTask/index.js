@@ -103,7 +103,7 @@ const NewTask = (props) => {
         />
         </Grid>
         <CardActions>
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
           <Button
           className={classes.button} 
           variant="contained" 
@@ -112,7 +112,7 @@ const NewTask = (props) => {
           >
             Delete
           </Button>
-        </Grid>
+        </Grid> */}
         <Grid item xs={6}>
           <Button
             className={classes.button} 
