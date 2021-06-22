@@ -42,6 +42,7 @@ class Main extends React.Component {
       status: false,
       date: new Date(),
       des: "",
+      delStatus: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);

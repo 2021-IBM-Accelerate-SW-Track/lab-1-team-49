@@ -62,6 +62,12 @@ class TodoList extends React.Component {
 
   // Function to add created task to list of tasks
   addTask = (task) => {
+    console.log('task',task);
+    console.log('list', this.state.list);
+    if (task.delStatus === false){
+      this.state.list.push(task)
+    }
+
     var duplicate = FormatListBulletedSharp;
     // If the list is empty
     if(this.state.list.length===0) {

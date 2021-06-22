@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import TodoList from '../todoList';
 
 const CurrentTask = (prop) => {
 
@@ -30,6 +31,7 @@ const CurrentTask = (prop) => {
     },
   }));
 
+ 
   const classes = useStyles();
   function handleChange(id, value) {
     if (id === "title") {
@@ -109,16 +111,7 @@ const CurrentTask = (prop) => {
         />
         </Grid>
         <CardActions>
-        <Grid item xs={6}>
-          <Button
-          className={classes.button}
-          variant="contained"
-          size="small"
-          startIcon={<DeleteIcon />}
-          >
-            Delete
-          </Button>
-        </Grid>
+
         <Grid item xs={6}>
           <Button
             className={classes.button}

@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CurrentTask from '../currentTask';
+import DeleteIcon from '@material-ui/icons/Delete';
+import TodoList from '../todoList';
+
 
 // After a new task is created, a task card with the data is rendered
 const TaskCard = (prop) => {
@@ -53,25 +56,14 @@ const TaskCard = (prop) => {
   const [edit, setEdit] = useState(false);
   const show = () => setEdit(edit => !edit);
 
-  //
-  //
-  // handleChange = (id, value) => {
-  //   if (id === "title") {
-  //     this.state.title = value;
-  //     console.log(this.state.title);
-  //   } else if (id === "date") {
-  //     this.state.date = value;
-  //   } else if (id === "des") {
-  //     this.state.des = value;
-  //   } else if (id === "status") {
-  //     this.state.status = true;
-  //   }
-  // }
+  // delete task from list
+  const [delStatus, setDeletion] = useState(false);
+  const deleteTask = () => setDeletion(delStatus => !delStatus);
+
 
   // Render new task
   return (
     <Fragment>
-
     <Card style={ isComplete ? completeColor : incompleteColor } variant="outlined">
       <Typography className={classes.title}>
         {prop.task.title}
@@ -102,10 +94,20 @@ const TaskCard = (prop) => {
           >
             Complete
           </Button>
+          <Button
+          className={classes.button} 
+          variant="contained" 
+          size="small"
+          startIcon={<DeleteIcon />}
+          onClick = {deleteTask}
+          >
+            Delete
+          </Button> 
       </CardActions>
     </Card>
     {edit === true ? <CurrentTask task={prop.task} /> : ''}
-    
+    {delStatus === true ? <TodoList/> : ''}
+
     </Fragment>
   )
 }
