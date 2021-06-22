@@ -41,7 +41,9 @@ class TodoList extends React.Component {
   addTask = (task) => {
     console.log('task',task);
     console.log('list', this.state.list);
-    this.state.list.push(task)
+    if (task.delStatus === false){
+      this.state.list.push(task)
+    }
     //I dont fully understand setState so I am just gonna push the task to the list - mieraf
     // this.setState(state => {
     //   const list = state.list.concat(task);
@@ -58,7 +60,7 @@ class TodoList extends React.Component {
       {this.state.list.length ?
         <div>
           {this.state.list.map(task =>
-            <TaskCard task={task} />
+            <TaskCard task={task}/>
           )}
         </div>
         :<p>Congrats! You have no tasks.</p> }
