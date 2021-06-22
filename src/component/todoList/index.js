@@ -2,6 +2,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
 import TaskCard from '../taskCard'
+import Alert from '@material-ui/lab/Alert';
+import { FormatListBulletedSharp } from '@material-ui/icons';
 
 
 // CSS Style
@@ -33,8 +35,29 @@ class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
+      duplicate: false,
     };
+    this.changeState = this.changeState.bind(this);
+  }
+  
+
+  // Changes status of task
+  changeState = (title) => {
+    if(this.state.list[this.state.list.findIndex(task => task.title === title)].status === false) {
+      this.setState(prevState => {
+        let currState = Object.assign({}, prevState);
+        currState.list[currState.list.findIndex(task => task.title === title)].status = true;
+        return currState;
+      })
+    } else{
+      this.setState(prevState => {
+        let currState = Object.assign({}, prevState);
+        currState.list[currState.list.findIndex(task => task.title === title)].status = false;
+        return currState;
+      })
+    }
+    
   }
 
   // Function to add created task to list of tasks
@@ -44,6 +67,51 @@ class TodoList extends React.Component {
     if (task.delStatus === false){
       this.state.list.push(task)
     }
+
+    var duplicate = FormatListBulletedSharp;
+    // If the list is empty
+    if(this.state.list.length===0) {
+      console.log('task',task);
+      console.log('list', this.state.list);
+      this.state.list.push(task)
+    }
+    else { // List contents exist
+      // Iterate through the list
+      for(var i=0; i<this.state.list.length; i++) {
+        if(this.state.list[i].title===task.title) { // If current title equals any existing titles
+          duplicate=true;
+          this.setState(prevState => {
+            let currState = Object.assign({}, prevState);
+            currState.duplicate = true;
+            return currState;
+          })
+          // console.log(duplicate);
+          break;
+          // Display message that says this title already exists
+        }
+        // else {
+        //   duplicate=false;
+        //   console.log(duplicate);
+        // }
+      }
+      // if(duplicate===true) {
+      //   console.log('this exists');
+      // }
+      // else {
+      //   console.log('this doesnt exist');
+      //   this.state.list.push(task)
+      // }
+      if (duplicate === false) {
+        this.state.list.push(task);
+        console.log("hello");
+      }
+    }
+
+
+    // Start iterating through task and comp
+    // If you find one that is equal, end the loop and say you found a duplicate
+    // If not, then display as normal
+
     //I dont fully understand setState so I am just gonna push the task to the list - mieraf
     // this.setState(state => {
     //   const list = state.list.concat(task);
@@ -57,10 +125,18 @@ class TodoList extends React.Component {
     return (
 
       <Grid>
+        <div>
+          {this.state.duplicate ? 
+          <Alert variant="outlined" severity="error">
+            You have already created this task. Create another one!
+          </Alert> :
+          '' }
+        </div>
+
       {this.state.list.length ?
         <div>
           {this.state.list.map(task =>
-            <TaskCard task={task}/>
+            <TaskCard task={task} handleChange={this.changeState}/>
           )}
         </div>
         :<p>Congrats! You have no tasks.</p> }
@@ -68,6 +144,8 @@ class TodoList extends React.Component {
       </Grid>
     );
   }
+
+  
 }
 
 

@@ -52,18 +52,19 @@ const NewTask = (props) => {
       }
       title="New Task"
       />
-      <Grid 
-        container 
-        alignItems="flex-start" 
+      <Grid
+        container
+        alignItems="flex-start"
         spacing={2}
       >
         <Grid item xs={12}>
-          <TextField 
+          <TextField
             fullWidth
             required
             id="title"
             type="text"
             label="Task Name"
+            //data-testid="new-item-input"
             onChange={(e) => props.handleChange("title", e.target.value)}
           />
         </Grid>
@@ -105,8 +106,8 @@ const NewTask = (props) => {
         <CardActions>
         {/* <Grid item xs={6}>
           <Button
-          className={classes.button} 
-          variant="contained" 
+          className={classes.button}
+          variant="contained"
           size="small"
           startIcon={<DeleteIcon />}
           >
@@ -115,11 +116,12 @@ const NewTask = (props) => {
         </Grid> */}
         <Grid item xs={6}>
           <Button
-            className={classes.button} 
-            variant="contained" 
+            className={classes.button}
+            variant="contained"
             size="small"
             startIcon={<CreateIcon />}
             onClick={props.handleSubmit}
+            //data-testid="new-item-button"
             >
               Create
             </Button>

@@ -13,7 +13,9 @@ import TodoList from '../todoList';
 
 // After a new task is created, a task card with the data is rendered
 const TaskCard = (prop) => {
+
   console.log('passed in task', prop.task);
+
   const useStyles = makeStyles(theme => ({
     title: {
       padding: "20px",
@@ -58,6 +60,7 @@ const TaskCard = (prop) => {
   const [delStatus, setDeletion] = useState(false);
   const deleteTask = () => setDeletion(delStatus => !delStatus);
 
+
   // Render new task
   return (
     <Fragment>
@@ -83,7 +86,11 @@ const TaskCard = (prop) => {
           variant="contained"
           size="small"
           startIcon={<CheckCircleIcon />}
-          onClick={complete}
+          onClick={() => {
+            complete();
+            prop.handleChange(prop.task.title);
+            }
+          }
           >
             Complete
           </Button>
@@ -100,6 +107,7 @@ const TaskCard = (prop) => {
     </Card>
     {edit === true ? <CurrentTask task={prop.task} /> : ''}
     {delStatus === true ? <TodoList/> : ''}
+
     </Fragment>
   )
 }
