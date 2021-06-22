@@ -10,7 +10,8 @@ import CreateIcon from '@material-ui/icons/Create';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 
-const CurrentTask = (props) => {
+const CurrentTask = (prop) => {
+
   // CSS styles
   const useStyles = makeStyles(theme => ({
     paper: {
@@ -30,30 +31,59 @@ const CurrentTask = (props) => {
   }));
 
   const classes = useStyles();
+  function handleChange(id, value) {
+    if (id === "title") {
+      prop.task.title = value;
+      console.log(prop.task.title);
+    } else if (id === "date") {
+      prop.task.date = value;
+    } else if (id === "des") {
+      prop.task.des = value;
+    } else if (id === "status") {
+      prop.task.status = true;
+    }
+  }
+
+  function handleClick() {
+    //this.setStat({ show: true });
+    prop.task.status = true;
+  };
+
+  // Function that handles close icon on CurrentTask form
+
+  const [update, setUpdate] = useState(false);
+  const show = () => {
+    console.log('toggling update');
+    setUpdate(update => !update);
+  }
+
+
+
 
   // Render new task
   return (
     <Card style={{ padding: 16 }} className={classes.paper}>
-      <CardHeader 
+      <CardHeader
       title="Edit Task"
       />
-      <Grid 
-        container 
-        alignItems="flex-start" 
+      <Grid
+        container
+        alignItems="flex-start"
         spacing={2}
       >
         <Grid item xs={12}>
-          <TextField 
+          <TextField
             fullWidth
             required
             type="text"
             label="Task Name"
-            value={props.task.title}
+            defaultValue={prop.task.title}
+            onChange={(e) => handleChange("title", e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           Date Created:
-          {props.task.date}
+          {prop.task.date}
         </Grid>
         <Grid item xs={12}>
           <Grid
@@ -65,7 +95,7 @@ const CurrentTask = (props) => {
               Status
             </Grid>
             <Grid item xs={4}>
-              {props.task.status === true ? "Completed" : "To Do"}
+              {prop.task.status === true ? "Completed" : "To Do"}
             </Grid>
           </Grid>
         </Grid>
@@ -74,27 +104,28 @@ const CurrentTask = (props) => {
           fullWidth
           type="text"
           label="Task Description"
-          value={props.task.des}
+          defaultValue={prop.task.des}
+          onChange={(e) => handleChange("des", e.target.value)}
         />
         </Grid>
         <CardActions>
         <Grid item xs={6}>
           <Button
-          className={classes.button} 
-          variant="contained" 
+          className={classes.button}
+          variant="contained"
           size="small"
           startIcon={<DeleteIcon />}
           >
             Delete
-          </Button>  
+          </Button>
         </Grid>
         <Grid item xs={6}>
           <Button
-            className={classes.button} 
-            variant="contained" 
+            className={classes.button}
+            variant="contained"
             size="small"
             startIcon={<CreateIcon />}
-            >
+            onClick={show}>
               Update
             </Button>
         </Grid>

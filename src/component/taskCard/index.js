@@ -10,7 +10,9 @@ import CurrentTask from '../currentTask';
 
 // After a new task is created, a task card with the data is rendered
 const TaskCard = (prop) => {
+
   console.log('passed in task', prop.task);
+
   const useStyles = makeStyles(theme => ({
     title: {
       padding: "20px",
@@ -51,6 +53,21 @@ const TaskCard = (prop) => {
   const [edit, setEdit] = useState(false);
   const show = () => setEdit(edit => !edit);
 
+  //
+  //
+  // handleChange = (id, value) => {
+  //   if (id === "title") {
+  //     this.state.title = value;
+  //     console.log(this.state.title);
+  //   } else if (id === "date") {
+  //     this.state.date = value;
+  //   } else if (id === "des") {
+  //     this.state.des = value;
+  //   } else if (id === "status") {
+  //     this.state.status = true;
+  //   }
+  // }
+
   // Render new task
   return (
     <Fragment>
@@ -84,6 +101,7 @@ const TaskCard = (prop) => {
       </CardActions>
     </Card>
     {edit === true ? <CurrentTask task={prop.task} /> : ''}
+    
     </Fragment>
   )
 }
