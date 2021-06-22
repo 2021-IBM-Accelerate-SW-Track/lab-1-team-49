@@ -94,7 +94,11 @@ const TaskCard = (prop) => {
           variant="contained"
           size="small"
           startIcon={<CheckCircleIcon />}
-          onClick={complete}
+          onClick={() => {
+            complete();
+            prop.handleChange(prop.task.title);
+            }
+          }
           >
             Complete
           </Button>
